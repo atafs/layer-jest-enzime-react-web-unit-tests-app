@@ -27,9 +27,23 @@ test("renders counter display", () => {
   expect(counterDisplay.length).toBe(1);
 });
 
-test("counter starts at 0", () => {});
+test("counter starts at 0", () => {
+  const wrapper = setup();
+  const counter = findByTestAttr(wrapper, "count").text();
+  expect(counter).toBe("0");
+});
 
-test("clicking on button increments counter display", () => {});
+test("clicking on button increments counter display", () => {
+  const wrapper = setup();
+  const button = findByTestAttr(wrapper, "increment-button");
+
+  // click the button
+  button.simulate("click");
+
+  // find hte display and test that the number has been incremented
+  const count = findByTestAttr(wrapper, "count").text();
+  expect(count).toBe("1");
+});
 
 test("renders debug options", () => {
   const wrapper = shallow(<App />);
